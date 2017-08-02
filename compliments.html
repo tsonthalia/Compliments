@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <link href="styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <center>
+      <h1 style="font-size: 100px">Write a compliment</h1>
+      <input style="font-size: 80px">
+      <br>
+      <br>
+      <button style="font-size: 50px">Submit</button>
+    </center>
+
+    <!--Soham's Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCMIrxz12pg8WJz8NhM6RqMgBr1aGnDEM4",
+        authDomain: "compliments-73fb6.firebaseapp.com",
+        databaseURL: "https://compliments-73fb6.firebaseio.com",
+        projectId: "compliments-73fb6",
+        storageBucket: "compliments-73fb6.appspot.com",
+        messagingSenderId: "567022977230"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <!--My Firebase-->
+    <!--<script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDHz9RHN7XovUPNE5OHDEGuMZatBBkpb_4",
+        authDomain: "compliments-36953.firebaseapp.com",
+        databaseURL: "https://compliments-36953.firebaseio.com",
+        projectId: "compliments-36953",
+        storageBucket: "",
+        messagingSenderId: "740427632903"
+      };
+      firebase.initializeApp(config);
+    </script>-->
+
+    <script>
+      var compliment = document.querySelector("h1");
+      var message = document.querySelector("input");
+      var button = document.querySelector("button");
+
+      var database = firebase.database();
+      var reference = database.ref("/");
+
+      button.onclick = function () {
+        reference.set(message.value);
+      }
+
+      reference.on("value", function(snapshot){
+        compliment.innerHTML = snapshot.val();
+      });
+    </script>
+  </body>
+</html>
